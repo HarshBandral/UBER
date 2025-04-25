@@ -1,4 +1,4 @@
-// to create the user account
+// to create the user's account
 const userModel = require('../models/user.model');
 
 module.exports.createUser = async ({

@@ -192,3 +192,110 @@ Ensure the following environment variables are set in the `.env` file:
 - `JWT_SECRET`: Secret key for generating JSON Web Tokens.
 
 ---
+
+### 5. Captain Registration
+
+**Endpoint:** `/captains/register`  
+**Method:** `POST`  
+**Description:** Registers a new captain.
+
+#### Request Body
+
+```json
+{
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "email": "janedoe@example.com",
+  "password": "password123",
+  "vehicle": {
+    "color": "Red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+#### Example Response
+
+**Success (201):**
+
+```json
+{
+  "_id": "64f1c8e5f1d2b3a456789013",
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "email": "janedoe@example.com",
+  "vehicle": {
+    "color": "Red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "car"
+  },
+  "status": "inactive",
+  "socketId": null
+}
+```
+
+**Error (400):**
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid Email",
+      "param": "email",
+      "location": "body"
+    },
+    {
+      "msg": "Firstname must be of at least 3 characters",
+      "param": "fullname.firstname",
+      "location": "body"
+    },
+    {
+      "msg": "Password must be of at least 6 characters",
+      "param": "password",
+      "location": "body"
+    },
+    {
+      "msg": "Color must be of at least 3 characters",
+      "param": "vehicle.color",
+      "location": "body"
+    },
+    {
+      "msg": "Plate must be of at least 3 characters",
+      "param": "vehicle.plate",
+      "location": "body"
+    },
+    {
+      "msg": "Capacity must be a number",
+      "param": "vehicle.capacity",
+      "location": "body"
+    },
+    {
+      "msg": "Vehicle type must be one of the following: car, motorcycle, auto",
+      "param": "vehicle.vehicleType",
+      "location": "body"
+    }
+  ]
+}
+```
+
+---
+
+### Validation Rules for Captain Registration
+
+- **`fullname.firstname`**: Must be at least 3 characters long.
+- **`fullname.lastname`**: Optional but must be at least 3 characters if provided.
+- **`email`**: Must be a valid email address.
+- **`password`**: Must be at least 6 characters long.
+- **`vehicle.color`**: Must be at least 3 characters long.
+- **`vehicle.plate`**: Must be at least 3 characters long.
+- **`vehicle.capacity`**: Must be a number greater than or equal to 1.
+- **`vehicle.vehicleType`**: Must be one of the following: `car`, `motorcycle`, `auto`.
+
+---
