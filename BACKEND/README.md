@@ -284,6 +284,135 @@ Ensure the following environment variables are set in the `.env` file:
   ]
 }
 ```
+### 6. Captain Login
+
+**Endpoint:** `/captains/login`  
+**Method:** `POST`  
+**Description:** Logs in an existing captain.
+
+#### Request Body
+
+```json
+{
+  "email": "janedoe@example.com",
+  "password": "password123"
+}
+```
+
+#### Example Response
+
+**Success (200):**
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "captain": {
+    "_id": "64f1c8e5f1d2b3a456789013",
+    "fullname": {
+      "firstname": "Jane",
+      "lastname": "Doe"
+    },
+    "email": "janedoe@example.com",
+    "vehicle": {
+      "color": "Red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "car"
+    },
+    "status": "inactive",
+    "socketId": null
+  }
+}
+```
+
+**Error (401):**
+
+```json
+{
+  "message": "Invalid email or password"
+}
+```
+
+---
+
+### 7. Get Captain Profile
+
+**Endpoint:** `/captains/profile`  
+**Method:** `GET`  
+**Description:** Retrieves the profile of the currently logged-in captain. Requires authentication.
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer <your-token>"
+}
+```
+
+#### Example Response
+
+**Success (200):**
+
+```json
+{
+  "_id": "64f1c8e5f1d2b3a456789013",
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "email": "janedoe@example.com",
+  "vehicle": {
+    "color": "Red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "car"
+  },
+  "status": "inactive",
+  "socketId": null
+}
+```
+
+**Error (401):**
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+---
+
+### 8. Captain Logout
+
+**Endpoint:** `/captains/logout`  
+**Method:** `GET`  
+**Description:** Logs out the currently logged-in captain by blacklisting their token. Requires authentication.
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer <your-token>"
+}
+```
+
+#### Example Response
+
+**Success (200):**
+
+```json
+{
+  "message": "Logged out"
+}
+```
+
+**Error (401):**
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
 
 ---
 
