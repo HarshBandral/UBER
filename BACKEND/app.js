@@ -12,7 +12,14 @@ const rideRoutes = require('./routes/ride.routes');
 const app = express();
 connectToDb();
 
-app.use(cors());
+// Define CORS options
+const corsOptions = {
+    origin: 'https://harsh-uber.onrender.com',
+    credentials: true,
+};
+
+app.use(cors(corsOptions)); // Use corsOptions here
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
